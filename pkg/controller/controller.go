@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/Xuyuanp/podwatcher/pkg/handlers"
 	"github.com/golang/glog"
@@ -144,7 +145,7 @@ func (c *Controller) processItem(key string) error {
 				ContainerName: cs.Name,
 				Reason:        cs.State.Waiting.Reason,
 				Message:       cs.State.Waiting.Message,
-				RawLog:        string(rawLog),
+				RawLogs:       strings.Split(string(rawLog), "\n"),
 			})
 		}
 	}

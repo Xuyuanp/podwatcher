@@ -6,7 +6,7 @@ type Event struct {
 	ContainerName string
 	Reason        string
 	Message       string
-	RawLog        string
+	RawLogs       []string
 }
 
 type Handler interface {

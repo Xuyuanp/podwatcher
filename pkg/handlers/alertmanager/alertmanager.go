@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/Xuyuanp/podwatcher/pkg/handlers"
 	amclient "github.com/prometheus/alertmanager/client"
@@ -73,7 +74,7 @@ func (h *handler) Handle(event *handlers.Event) error {
 			"namespace": amclient.LabelValue(event.Namespace),
 			"name":      amclient.LabelValue(event.Name),
 			"container": amclient.LabelValue(event.ContainerName),
-			"log":       amclient.LabelValue(event.RawLog),
+			"logs":      amclient.LabelValue(strings.Join(event.RawLogs, "\n")),
 			"alertname": "podwatcher",
 			"severity":  "critical",
 		},

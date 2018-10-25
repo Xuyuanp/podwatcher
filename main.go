@@ -7,7 +7,7 @@ import (
 	"syscall"
 
 	"github.com/Xuyuanp/podwatcher/pkg/controller"
-	"github.com/Xuyuanp/podwatcher/pkg/handlers/alertmanager"
+	"github.com/Xuyuanp/podwatcher/pkg/handlers/email"
 	"github.com/golang/glog"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
@@ -51,5 +51,5 @@ func main() {
 		close(stopCh)
 	}()
 
-	controller.NewController(clientset, alertmanager.NewHandler(), namespace).Run(stopCh)
+	controller.NewController(clientset, email.NewHandler(), namespace).Run(stopCh)
 }

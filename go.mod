@@ -34,6 +34,8 @@ require (
 	golang.org/x/sys v0.0.0-20181022134430-8a28ead16f52 // indirect
 	golang.org/x/time v0.0.0-20180412165947-fbb02b2291d2 // indirect
 	google.golang.org/appengine v1.2.0 // indirect
+	gopkg.in/alexcesaro/quotedprintable.v2 v2.0.0-20150314193201-9b4a113f96b3 // indirect
+	gopkg.in/gomail.v1 v1.0.0-20150320132819-11b919ab4933
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.2.1 // indirect
 	k8s.io/api v0.0.0-20181018013834-843ad2d9b9ae

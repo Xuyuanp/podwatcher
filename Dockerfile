@@ -2,14 +2,9 @@ FROM golang:1.11.1 AS builder
 
 WORKDIR /kubewatch
 
-ADD go.mod .
-ADD go.sum .
-
-RUN go mod download
-
 ADD . .
 
-RUN CGO_ENABLED=0 go build -a -installsuffix cgo -o /tmp/kubewatch
+RUN CGO_ENABLED=0 go build -mod=vendor -a -installsuffix cgo -o /tmp/kubewatch
 
 ######
 

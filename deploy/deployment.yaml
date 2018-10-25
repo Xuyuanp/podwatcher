@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: podwatcher
+  name: podwatcher
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: podwatcher
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: podwatcher
+    spec:
+      serviceAccountName: podwatcher
+      containers:
+      - image: xuyuanp/podwatcher:v0.0.2
+        args:
+        - --logtostderr
+        - --v=2
+        - --namespace=default
+        - --smtp-host=smtp.exmail.qq.com
+        - --smtp-port=465
+        - --smtp-username=<your-email-address>
+        - --smtp-password=<your-password>
+        - --smtp-receivers=<alice@hell.com>,<bob@hell.com>
+        imagePullPolicy: IfNotPresent
+        name: podwatcher
+        resources:
+          requests:
+            cpu: 10m
+            memory: 20Mi
+          limits:
+            cpu: 50m
+            memory: 100Mi
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: localtime
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /etc/localtime
+        name: localtime
